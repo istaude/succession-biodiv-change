@@ -107,7 +107,7 @@ bind_rows(
 
 # panel c -----------------------------------------------------------------
 
-# load Vellent et al 2013 data
+# load Vellend et al 2013 data
 d <- read_excel("Data/sd01.xls")
 length(unique(d$Data_set))
 
@@ -144,10 +144,7 @@ dt %>% filter(Habitat == "Forest") %>%
     legend.position = "none",
     legend.title = element_blank()) +
   labs(y = "Change in\n species richness\n(log-ratios)", x = "Plot size (sqm)", 
-       title = "In temporal studies richness trends shift from negative to positive with increasing scale") -> fig2c
-
-
-
+       title = "In temporal studies, richness trends shift from negative to positive with increasing scale") -> fig2c
 
 
 # plot together -----------------------------------------------------------

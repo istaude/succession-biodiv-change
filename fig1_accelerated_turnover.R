@@ -10,8 +10,6 @@ library(showtext)
 library(patchwork)
 showtext_auto()
 import_public_sans()
-font_add_google("Roboto Condensed") #just run once
-
 
 # panel a -----------------------------------------------------------------
 
@@ -119,8 +117,6 @@ ggplot() +
 
 
 
-
-
 # panel c -----------------------------------------------------------------
 
 dt <- data.frame(predictor = c(1:100), similarity = seq(0.8,0.2, length.out = 100))
@@ -149,7 +145,7 @@ ggplot() +
 # plot
 figa /
   (figb + figc) + plot_annotation(tag_levels = 'a') &
-  theme(plot.tag = element_text(family = 'Roboto Condensed'))
+  theme(plot.tag = element_text(family = 'Arial Narrow'))
 
 ggarrange(figa, labels = c("a"),
   ggarrange(figb, figc, ncol = 2, labels = c("b", "c")), nrow = 2)
