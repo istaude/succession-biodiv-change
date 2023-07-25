@@ -1,0 +1,21 @@
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+## About
+
+This repository contains all the R code and data to reproduce the
+figures in *“Biodiversity change in light of succession theory”*.
+
+## Folder structure
+
+1.  The .R files contain the R code to reproduce the underlying
+    simulated data for each figure, the figures themselves, and, if
+    applicable, any analysis (for Figure 2c).
+
+2.  `Data` contains the previously published data by [Vellend et al
+    2013](https://www.pnas.org/doi/10.1073/pnas.1312779110.).
+
+## Contact
+
+Please contact us at <ingmar.staude@uni-leipzig.de> if you have further
+questions.
