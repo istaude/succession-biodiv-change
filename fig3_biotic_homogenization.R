@@ -114,12 +114,17 @@ data.frame(Predictor = c(1:100, 1:100),
 # plot together -----------------------------------------------------------
 
 ggarrange(
-  fig3a, fig3b,  ncol = 1, nrow = 2, labels = c("a", "b")
+  fig3a, fig3b,  ncol = 1, nrow = 2, labels = c("a", "b"),
+  font.label=list(color="black",
+                  size=12,
+                  family = "Arial Narrow")
 )
 
+showtext_opts(dpi=600)
 ggsave(bg = "white",
-  "Figures/fig_biohom_pubs.png",
+  "Figures/fig_biohom_pubs.pdf",
   width = 5.67,
   height = 4.58,
   dpi = 600
 )
+showtext_opts(dpi=96)

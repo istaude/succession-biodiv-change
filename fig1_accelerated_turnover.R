@@ -8,8 +8,10 @@ library(grid)
 library(ggpubr)
 library(showtext)
 library(patchwork)
+font_paths("C:/Windows/Fonts")
+font_add("Arial Narrow", regular = "arialn.ttf", italic = "arialni.ttf", 
+         bold = "arialnb.ttf")
 showtext_auto()
-import_public_sans()
 
 # panel a -----------------------------------------------------------------
 
@@ -18,7 +20,7 @@ dt1 <- data.frame( turnover = 100 * exp(-0.07 * (c(1:100)) ),
 dt2 <- data.frame( turnover = 100 * exp(-0.07 * (c(1:100)) ), 
                    predictor = c(111:210))
 
-ggplot() +
+(ggplot() +
   geom_line(data = dt1, aes(x= predictor, y = turnover), lwd = 1) +
   geom_line(data = dt2, aes(x= predictor, y = turnover), lwd = 1) +
   geom_point(aes(x= 5, y = 70.46881), size = 4, col = "#5deac5") +
@@ -60,7 +62,7 @@ ggplot() +
     plot.margin=unit(rep(0.2,4),"cm"),
     text = element_text(size = 14),
     axis.text.x = element_blank(), axis.text.y = element_blank(),
-    axis.line = element_line() ) -> figa
+    axis.line = element_line() ) -> figa)
 
 
 # panel b -----------------------------------------------------------------
@@ -113,7 +115,7 @@ ggplot() +
     axis.text.x = element_blank(),
     axis.line = element_line() ) +
   labs(y = "Turnover rate", x = "Successional stage", 
-       title = "Natural vs. global change turnover rates") -> figb)
+       title = "Natural versus global change turnover rates") -> figb)
 
 
 
@@ -148,13 +150,19 @@ figa /
   theme(plot.tag = element_text(family = 'Arial Narrow'))
 
 ggarrange(figa, labels = c("a"),
-  ggarrange(figb, figc, ncol = 2, labels = c("b", "c")), nrow = 2)
+          font.label=list(color="black",
+                          size=12,
+                          family = "Arial Narrow"),
+  ggarrange(figb, figc, ncol = 2, labels = c("b", "c"),
+            font.label=list(color="black",
+                            size=12,
+                            family = "Arial Narrow")), nrow = 2)
 
-
+showtext_opts(dpi=600)
 ggsave(bg = "white",
-       "Figures/fig_accturn_pubs.png",
+       "Figures/fig_accturn_pubs.pdf",
        width = 7.7,
        height = 4.97,
        dpi = 1200
 )
-
+showtext_opts(dpi=96)

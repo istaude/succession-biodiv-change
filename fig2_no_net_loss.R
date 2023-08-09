@@ -9,7 +9,6 @@ library(ggpubr)
 library(readxl)
 library(tidyverse)
 
-import_public_sans()
 # panel a -----------------------------------------------------------------
 
 dx2 <- data.frame(Predictor = c(1:100, 1:100), 
@@ -102,7 +101,7 @@ bind_rows(
   coord_cartesian(ylim=c(0, 80)) +
   scale_color_manual(values=c("#7e5dea", "#5deac5", "#5deac5", "#7e5dea"),guide = FALSE) +
   labs(y = "Mean species richness", x = " ", 
-       title = "Succession predicts contrasting richness trends for temporal vs. space-for-time studies") -> fig2b
+       title = "Succession predicts contrasting richness trends for temporal versus space-for-time studies") -> fig2b
 
 
 # panel c -----------------------------------------------------------------
@@ -127,13 +126,13 @@ m <- lm(log_SR_ratio ~ Duration + log(Plot_size_max), data = dt %>% filter(Habit
 summary(m)
 
 
-dt %>% filter(Habitat == "Forest") %>% 
+(dt %>% filter(Habitat == "Forest") %>% 
   ggplot(aes(y = log_SR_ratio, x = Plot_size_max) ) +
   geom_smooth(method = "lm", fill= "#7e5dea", col = "black", alpha = 0.2) +
   geom_point(size = 3, col = "#7e5dea", alpha =0.4) +
   geom_hline(yintercept = 0, lty = 2) +
   scale_x_log10() +
-  stat_cor(aes(label = paste(..rr.label.., ..p.label.., sep = "~`,`~")), 
+  stat_cor(aes(label = paste(after_stat(rr.label), after_stat(p.label), sep = "~~")), 
            label.y = -1.3, p.accuracy = 0.001, r.accuracy = 0.01)+
   theme_ipsum(axis_title_size = 12, 
               plot_title_size = 12, axis_title_just = "mm") +
@@ -143,21 +142,30 @@ dt %>% filter(Habitat == "Forest") %>%
     axis.line = element_line(),
     legend.position = "none",
     legend.title = element_blank()) +
-  labs(y = "Change in\n species richness\n(log-ratios)", x = "Plot size (sqm)", 
-       title = "In temporal studies, richness trends shift from negative to positive with increasing scale") -> fig2c
+  labs(y = "Change in\n species richness\n(log-ratios)", 
+       x = "Plot size (sq m)", 
+       title = "In temporal studies, richness trends shift from negative to positive with increasing scale") -> 
+    fig2c)
 
 
 # plot together -----------------------------------------------------------
 ggarrange(
   ggarrange(
-    fig1a, fig1b, ncol = 1, labels = c("a", "b")),
-  fig1c, nrow = 2, heights = c(2, 1),  labels = c("","c")
+    fig2a, fig2b, ncol = 1, labels = c("a", "b"), 
+    font.label=list(color="black",
+                    size=12,
+                    family = "Arial Narrow")),
+  fig2c, nrow = 2, heights = c(2, 1),  labels = c("","c"), 
+  font.label=list(color="black",
+                  size=12,
+                  family = "Arial Narrow")
 )
-  
 
+showtext_opts(dpi=600)
 ggsave(bg = "white",
-       "Figures/fig_nonetloss_pubs.png",
+       "Figures/fig_nonetloss_pubs.pdf",
        width = 6.8,
        height = 6.52,
        dpi = 600
 )
+showtext_opts(dpi=96)
